@@ -1,13 +1,19 @@
-#ifndef WYRAZENIEZESP_HH
-#define WYRAZENIEZESP_HH
+#include<iostream>
+#ifndef STATYSTYKA
+#define STATYSTYKA
 
 
 
-#include "LZespolona.hh"
-#include "WyrazenieZesp.hh"
+struct staty
+{
+    int dobrze;
+    int zle;
+};
 
-/*
- * Tu nalezy zdefiniowac funkcje, ktore definiuja model statystyki 
- */
+
+double procent (staty Odp);
+std::ostream& operator << (std::ostream& StrWyj, staty Odp);
+
+
 
 #endif

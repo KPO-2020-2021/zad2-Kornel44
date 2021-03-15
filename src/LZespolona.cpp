@@ -1,30 +1,8 @@
 #include "LZespolona.hh"
-#include <cmath>
+#include<iostream>
 
-#define MIN_DIFF 0.00001
+using namespace std;
 
-/*!
- * Realizuje porównanie dwoch liczb zespolonych.
- * Argumenty:
- *    Skl1 - pierwsza porównywana liczba zespolona,
- *    Skl2 - druga porównywana liczba zespolona.
- * Zwraca:
- *    True dla równych liczb zespolonych.
- */
-
-bool  operator == (LZespolona  Skl1,  LZespolona  Skl2){
-  if ((Skl1.re == Skl2.re) && (Skl1.im == Skl2.im))
-    return true;
-  else
-    return false;
-  //alternatywnie, dla MIN_DIFF i wyników od użytkownika
-  /*
-  if abs(Skl1.re - Skl2.re) <= MIN_DIFF && abs(Skl1.im - Skl2.im) <= MIN_DIFF
-    return true;
-  else
-    return false;
-  */
-}
 
 /*!
  * Realizuje dodanie dwoch liczb zespolonych.
@@ -34,7 +12,8 @@ bool  operator == (LZespolona  Skl1,  LZespolona  Skl2){
  * Zwraca:
  *    Sume dwoch skladnikow przekazanych jako parametry.
  */
-LZespolona  operator + (LZespolona  Skl1,  LZespolona  Skl2){
+LZespolona  operator + (LZespolona  Skl1,  LZespolona  Skl2)
+{
   LZespolona  Wynik;
 
   Wynik.re = Skl1.re + Skl2.re;
@@ -42,19 +21,77 @@ LZespolona  operator + (LZespolona  Skl1,  LZespolona  Skl2){
   return Wynik;
 }
 
-
-/*!
- * Realizuje dzielenie liczby zespolonej przez skakar.
- * Argumenty:
- *    Skl1 - dzielona liczba zespolona,
- *    Skl2 - skalar-dzielnik.
- * Zwraca:
- *    Wynik dzielenia dwoch skladnikow przekazanych jako parametry.
- */
-LZespolona  operator / (LZespolona  Skl1,  double  Skl2){
+LZespolona  operator - (LZespolona  Skl1,  LZespolona  Skl2)
+{
   LZespolona  Wynik;
 
-  Wynik.re = Skl1.re / Skl2;
-  Wynik.im = Skl1.im / Skl2;
+  Wynik.re = Skl1.re - Skl2.re;
+  Wynik.im = Skl1.im - Skl2.im;
   return Wynik;
+}
+
+LZespolona  operator * (LZespolona  Skl1,  LZespolona  Skl2)
+{
+  LZespolona  Wynik;
+  Wynik.re=Skl1.re*Skl2.re-Skl1.im*Skl2.im;
+  Wynik.im=Skl1.re*Skl2.im+Skl1.im*Skl2.re;
+ 
+  return Wynik;
+}
+
+LZespolona Sprzezenie (LZespolona Skl1)
+{
+  LZespolona Wynik;
+  Wynik.re=Skl1.re;
+  Wynik.im=0-Skl1.im;
+
+  return Wynik;
+
+}
+
+double Modul2 (LZespolona Skl1)
+{
+ double Wynik;
+ Wynik=Skl1.re*Skl1.re+Skl1.im*Skl1.im;
+ return Wynik;
+
+}
+LZespolona operator / (LZespolona Skl1, LZespolona Skl2)
+{
+  LZespolona Wynik;
+  Wynik=Skl1*Sprzezenie(Skl2)/Modul2(Skl2);
+  return Wynik;
+}
+
+LZespolona operator/ (LZespolona Skl1, double Skl2)
+{
+  LZespolona Wynik;
+  Wynik.re=Skl1.re/Skl2;
+  Wynik.im=Skl1.im/Skl2;
+  return Wynik;
+}
+
+std::ostream & operator<< (std::ostream & StrWyj, LZespolona Skl1)
+{
+  if (Skl1.im>=0)
+{
+  return StrWyj<<"("<<Skl1.re<<"+"<<Skl1.im<<"i)";
+}
+else
+return StrWyj<<"("<<Skl1.re<<Skl1.im<<"i)";
+}
+
+std::istream& operator>> (std::istream & StrWej, LZespolona & Odp)
+{
+ StrWej>>Odp.re>>Odp.im;
+ StrWej.ignore();
+ return StrWej;
+}
+
+bool operator == (LZespolona Skl1, LZespolona Skl2)
+{
+  if(Skl1.re==Skl2.re && Skl1.im==Skl2.im)
+  return true;
+  else
+  return false;
 }
