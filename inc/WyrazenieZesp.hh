@@ -31,7 +31,7 @@ struct WyrazenieZesp {
  *
  */
 std::ostream & operator<< (std::ostream & StrWyj, const WyrazenieZesp WyrZ);
-
+std::istream & operator>> (std::istream & StrWej, WyrazenieZesp & WyrZ);
 
 
 #endif

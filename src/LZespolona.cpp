@@ -1,7 +1,7 @@
 #include "LZespolona.hh"
 #include<iostream>
-#include<fstream>
 #include<cmath>
+#include<iomanip>
 #define MINDIV 0.01
 
 
@@ -75,6 +75,7 @@ LZespolona LZespolona::operator/ (double Skl2)const
 
 std::ostream & operator<< (std::ostream & StrWyj, const LZespolona Skl)
 {
+  StrWyj<<std::fixed<<std::setprecision(2);
   StrWyj<<"("<<Skl.re<<std::showpos<<Skl.im<<std::noshowpos<<")";
  return StrWyj;
 }
