@@ -4,28 +4,28 @@
 using namespace std;
 
 
-LZespolona Oblicz (WyrazenieZesp WyrZ)
+LZespolona WyrazenieZesp::Oblicz ()const
 {
     LZespolona Wynik;
-    switch (WyrZ.Op)
+    switch (this->Op)
     {
     case 0:{
-        Wynik=WyrZ.Arg1+WyrZ.Arg2;
+        Wynik=this->Arg1+this->Arg2;
         break;
     }
     case 1:{
-        Wynik=WyrZ.Arg1-WyrZ.Arg2;
+        Wynik=this->Arg1-this->Arg2;
         break;
     }
     case 2:{
-        Wynik=WyrZ.Arg1*WyrZ.Arg2;
+        Wynik=this->Arg1*this->Arg2;
         break;
     }
     case 3:{
-        if (Modul2(WyrZ.Arg2)==0)
+        if (this->Arg2.Modul2()==0)
         cerr<<"Błąd:Dzielenie przez zero"<<endl;
         else
-        Wynik=WyrZ.Arg1/WyrZ.Arg2;
+        Wynik=this->Arg1/this->Arg2;
         break;
     }
     default:
@@ -33,7 +33,7 @@ LZespolona Oblicz (WyrazenieZesp WyrZ)
     return Wynik;
 
 }
-std::ostream& operator<<(std::ostream& StrWyj, WyrazenieZesp WyrZ)
+std::ostream& operator<<(std::ostream& StrWyj, const WyrazenieZesp WyrZ)
 {
     const char ZnakOP[]="+-*/";
     return StrWyj<<WyrZ.Arg1<<ZnakOP[WyrZ.Op]<<WyrZ.Arg2;

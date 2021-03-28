@@ -1,7 +1,9 @@
 #include "LZespolona.hh"
 #include<iostream>
+#include<fstream>
+#include<cmath>
+#define MINDIV 0.01
 
-using namespace std;
 
 
 /*!
@@ -12,85 +14,95 @@ using namespace std;
  * Zwraca:
  *    Sume dwoch skladnikow przekazanych jako parametry.
  */
-LZespolona  operator + (LZespolona  Skl1,  LZespolona  Skl2)
+LZespolona  LZespolona::operator + (LZespolona  Skl2)const
 {
   LZespolona  Wynik;
 
-  Wynik.re = Skl1.re + Skl2.re;
-  Wynik.im = Skl1.im + Skl2.im;
+  Wynik.re = this->re + Skl2.re;
+  Wynik.im = this->im + Skl2.im;
   return Wynik;
 }
 
-LZespolona  operator - (LZespolona  Skl1,  LZespolona  Skl2)
+LZespolona  LZespolona::operator - (LZespolona  Skl2)const
 {
   LZespolona  Wynik;
 
-  Wynik.re = Skl1.re - Skl2.re;
-  Wynik.im = Skl1.im - Skl2.im;
+  Wynik.re = this->re - Skl2.re;
+  Wynik.im = this->im - Skl2.im;
   return Wynik;
 }
 
-LZespolona  operator * (LZespolona  Skl1,  LZespolona  Skl2)
+LZespolona  LZespolona::operator * ( LZespolona  Skl2)const
 {
   LZespolona  Wynik;
-  Wynik.re=Skl1.re*Skl2.re-Skl1.im*Skl2.im;
-  Wynik.im=Skl1.re*Skl2.im+Skl1.im*Skl2.re;
+  Wynik.re=this->re*Skl2.re-this->im*Skl2.im;
+  Wynik.im=this->re*Skl2.im+this->im*Skl2.re;
  
   return Wynik;
 }
 
-LZespolona Sprzezenie (LZespolona Skl1)
+LZespolona LZespolona::Sprzezenie ()const
 {
   LZespolona Wynik;
-  Wynik.re=Skl1.re;
-  Wynik.im=0-Skl1.im;
+  Wynik.re=this->re;
+  Wynik.im=0-this->im;
 
   return Wynik;
 
 }
 
-double Modul2 (LZespolona Skl1)
+double LZespolona::Modul2()const
 {
  double Wynik;
- Wynik=Skl1.re*Skl1.re+Skl1.im*Skl1.im;
+ Wynik=this->re*this->re+this->im*this->im;
  return Wynik;
 
 }
-LZespolona operator / (LZespolona Skl1, LZespolona Skl2)
+LZespolona LZespolona::operator / (LZespolona Skl2)const
 {
   LZespolona Wynik;
-  Wynik=Skl1*Sprzezenie(Skl2)/Modul2(Skl2);
+  Wynik=*this*Skl2.Sprzezenie()/Skl2.Modul2();
   return Wynik;
 }
 
-LZespolona operator/ (LZespolona Skl1, double Skl2)
+LZespolona LZespolona::operator/ (double Skl2)const
 {
   LZespolona Wynik;
-  Wynik.re=Skl1.re/Skl2;
-  Wynik.im=Skl1.im/Skl2;
+  Wynik.re=this->re/Skl2;
+  Wynik.im=this->im/Skl2;
   return Wynik;
 }
 
-std::ostream & operator<< (std::ostream & StrWyj, LZespolona Skl1)
+std::ostream & operator<< (std::ostream & StrWyj, const LZespolona Skl)
 {
-  if (Skl1.im>=0)
-{
-  return StrWyj<<"("<<Skl1.re<<"+"<<Skl1.im<<"i)";
-}
-else
-return StrWyj<<"("<<Skl1.re<<Skl1.im<<"i)";
+  StrWyj<<"("<<Skl.re<<std::showpos<<Skl.im<<std::noshowpos<<")";
+ return StrWyj;
 }
 
-std::istream& operator>> (std::istream & StrWej, LZespolona & Odp)
+void CzytajZnak(std::istream & StrWej, char Znak)
 {
- StrWej>>Odp.re>>Odp.im;
+char CzytanyZnak=' ';
+StrWej>>CzytanyZnak;
+if(CzytanyZnak!=Znak){
+  StrWej.setstate(std::ios::failbit);}
+}
+
+
+
+
+std::istream& operator>> (std::istream & StrWej, LZespolona & Skl)
+{
+ CzytajZnak(StrWej,'(');
+ StrWej>>Skl.re>>Skl.im;
+ CzytajZnak(StrWej,'i');
+ CzytajZnak(StrWej,')');
  StrWej.ignore();
  return StrWej;
 }
 
-bool operator == (LZespolona Skl1, LZespolona Skl2)
+bool LZespolona::operator == ( LZespolona Skl2)const
 {
-  if(Skl1.re==Skl2.re && Skl1.im==Skl2.im)
+  if(abs(this->re-Skl2.re)<MINDIV && abs(this->im-Skl2.im<MINDIV))
   return true;
   else
   return false;

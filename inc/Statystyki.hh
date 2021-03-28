@@ -6,13 +6,16 @@
 
 struct staty
 {
-    int dobrze;
-    int zle;
+    double dobrze;
+    double zle;
+
+    double procent ()const;
+    
 };
 
+std::ostream& operator << (std::ostream& StrWyj, const staty Odp);
 
-double procent (staty Odp);
-std::ostream& operator << (std::ostream& StrWyj, staty Odp);
+
 
 
 

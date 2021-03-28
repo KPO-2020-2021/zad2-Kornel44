@@ -2,7 +2,7 @@
 #include <ios>
 #include <limits>
 #include "BazaTestu.hh"
-#include"Statystyka.hh"
+#include"Statystyki.hh"
 
 using namespace std;
 
@@ -57,14 +57,14 @@ int main(int argc, char **argv)
       break;
       }
     }
-    if (Odp==Oblicz(WyrZ_PytanieTestowe))
+    if (Odp==WyrZ_PytanieTestowe.Oblicz())
     {
       cout<<"Poprawna odpowiedz"<<endl;
       Staty.dobrze++;
     }
       else
       {cout<<"Blenda odpowiedz"<<endl;
-      cout<<"Poprawna odpowiedz to"<<Oblicz(WyrZ_PytanieTestowe)<<endl;
+      cout<<"Poprawna odpowiedz to"<<WyrZ_PytanieTestowe.Oblicz()<<endl;
       Staty.zle++;}
 
     }

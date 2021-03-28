@@ -20,6 +20,9 @@ struct WyrazenieZesp {
   LZespolona   Arg1;   // Pierwszy argument wyrazenia arytmetycznego
   Operator     Op;     // Opertor wyrazenia arytmetycznego
   LZespolona   Arg2;   // Drugi argument wyrazenia arytmetycznego
+
+  
+  LZespolona Oblicz()const;
 };
 
 
@@ -27,9 +30,8 @@ struct WyrazenieZesp {
  * Funkcje ponizej nalezy zdefiniowac w module.
  *
  */
+std::ostream & operator<< (std::ostream & StrWyj, const WyrazenieZesp WyrZ);
 
 
-std::ostream & operator<< (std::ostream & StrWyj, WyrazenieZesp  WyrZ);
-LZespolona Oblicz(WyrazenieZesp  WyrZ);
 
 #endif
