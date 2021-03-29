@@ -2,6 +2,7 @@
 #include<iostream>
 #include<cmath>
 #include<iomanip>
+#include<stdexcept>
 #define MINDIV 0.01
 
 
@@ -68,9 +69,12 @@ LZespolona LZespolona::operator / (LZespolona Skl2)const
 LZespolona LZespolona::operator/ (double Skl2)const
 {
   LZespolona Wynik;
+  if(Skl2==0)
+  throw std::runtime_error ("Dzielenie przez zero");
+  else{
   Wynik.re=this->re/Skl2;
   Wynik.im=this->im/Skl2;
-  return Wynik;
+  return Wynik;}
 }
 
 std::ostream & operator<< (std::ostream & StrWyj,  LZespolona Skl)

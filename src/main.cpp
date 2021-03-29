@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ios>
 #include <limits>
+#include <stdexcept>
 #include "BazaTestu.hh"
 #include"Statystyki.hh"
 
@@ -43,7 +44,7 @@ int main(int argc, char **argv)
 
  
 
-
+try{
   while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe)) {
     cout << "Podaj wynik operacji:";
     cout << WyrZ_PytanieTestowe<< endl;
@@ -68,7 +69,11 @@ int main(int argc, char **argv)
       cout<<"Poprawna odpowiedz to"<<WyrZ_PytanieTestowe.Oblicz()<<endl;
       Staty.zle++;}
 
-    }
+    }}
+  catch(runtime_error& e){
+    cerr<<"Znaleziono wyjątek"<<endl;
+    cerr<<e.what();
+  }
   
 
   cout<<Staty<<endl;

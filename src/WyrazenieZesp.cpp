@@ -22,9 +22,6 @@ LZespolona WyrazenieZesp::Oblicz ()const
         break;
     }
     case 3:{
-        if (this->Arg2.Modul2()==0)
-        cerr<<"Błąd:Dzielenie przez zero"<<endl;
-        else
         Wynik=this->Arg1/this->Arg2;
         break;
     }

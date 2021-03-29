@@ -34,18 +34,25 @@ ${OBJ}/Statystyki.o: ${SRC}/Statystyki.cpp inc/Statystyki.hh
 ${TBIN}/test_1: ${TBIN} ${OBJ}/LZespolona.o 
 	g++ -o ${TESTS}/bin/test_1 ${FLAGS} -I${TESTS}/doctest ${TESTS}/test1.cpp ${OBJ}/LZespolona.o
 
-${TBIN}/test_2: ${TBIN} ${OBJ}/LZespolona.o 
-	g++ -o ${TESTS}/bin/test_2 ${FLAGS} -I${TESTS}/doctest ${TESTS}/test2.cpp ${OBJ}/LZespolona.o
+${TBIN}/test_2: ${TBIN} ${OBJ}/LZespolona.o ${OBJ}/WyrazenieZesp.o
+	g++ -o ${TESTS}/bin/test_2 ${FLAGS} -I${TESTS}/doctest ${TESTS}/test2.cpp ${OBJ}/WyrazenieZesp.o ${OBJ}/LZespolona.o
+
+${TBIN}/test_3: ${TBIN} ${OBJ}/Statystyki.o
+	g++ -o ${TESTS}/bin/test_3 ${FLAGS} -I${TESTS}/doctest ${TESTS}/test3.cpp ${OBJ}/Statystyki.o
+
 
 
 ${TBIN}:
 	mkdir ${TBIN}
 
-test:  ${TBIN}/test_1 ${TBIN}/test_2
+test:  ${TBIN}/test_1 ${TBIN}/test_2 ${TBIN}/test_3
 	${TBIN}/test_1 
 	${TBIN}/test_2
+	${TBIN}/test_3
 run:
 	${TRGDIR}/test_arytm_zesp latwy
+runTru:
+	${TRGDIR}/test_arytm_zesp trudny
 
 clean:
 	rm -f ${TRGDIR}/test_arytm_zesp ${OBJ}/* ${TBIN}/*
