@@ -2,14 +2,14 @@
 #ifndef STATYSTYKA
 #define STATYSTYKA
 
-
+//Plik zawiera strukture przechowujoca dane statystyczne testu oraz zapowiedz przeciazenia ja wysujaca
 
 struct staty
 {
     double dobrze;
     double zle;
 
-    double procent ()const;
+    double procent ()const; // metoda obliczjaca procent poprawnych odp
     
 };
 

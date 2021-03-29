@@ -8,10 +8,7 @@
 
 using namespace std;
 
-/*
- * Tablica, ktora jest widoczna tylko w tym module.
- * Zawiera ona tresc latwego testu.
- */
+//Tablice o zadanej wielkosci przygotowane do wczytania testu
 static WyrazenieZesp  TestLatwy[4];
 static WyrazenieZesp TestTrudny[6];
 
@@ -76,20 +73,20 @@ bool InicjalizujTest( BazaTestu  *wskBazaTestu, const char *sNazwaTestu )
   int Pytanie=0;
 
   if (!strcmp(sNazwaTestu,"latwy")) {
-    Test.open("latwy.txt");
-    if (!Test.is_open()) return false;
-    while(Pytanie<4){
+    Test.open("latwy.txt");              //otwieramy plik w trybie do odczytu
+    if (!Test.is_open()) return false; // jesli blad otwarcia pliku zwracamy false
+    while(Pytanie<4){                  //wczytujemy pierwsze 4 poprawne wyrazenia z pliku do tablicy 
     Test>>TestLatwy[Pytanie];
     if(Test.fail()){
-    Test.ignore(numeric_limits<streamsize>::max(),'\n');
-    Test.clear();
+    Test.ignore(numeric_limits<streamsize>::max(),'\n'); //po bledzie wczytania ignorujemy cala linie
+    Test.clear();                    // czyscimy flagi by moc sprobowac jeszcze raz
     }else{
     Pytanie+=1;}
     }
     UstawTest(wskBazaTestu,TestLatwy,sizeof(TestLatwy)/sizeof(WyrazenieZesp));
     return true;
   }
-  if (!strcmp(sNazwaTestu,"trudny")) {
+  if (!strcmp(sNazwaTestu,"trudny")) {                  //to samo jak wyzej dla testu trudnego
     Test.open("trudny.txt");
     if (!Test.is_open()) return false;
     while(Pytanie<6){

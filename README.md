@@ -1,5 +1,7 @@
 # Projekt 2 - Arytmetyka liczb zespolonych
 
+# UWAGA: Zrealizowałem rozszerzenie dotyczące czytania wyrażeń zespolonych z pliku, w folderze głównym znajdują się dwa pliki .txt, odpowiadające zestawą łatwemu i trudnemu (Program wczytuje 4 pierwsze wyrażenia z pliku łatwy lub 6 pierwszych z pliku trudny). Aby odpalić test w wersjii  trudnej należ użyć opcji runTru w Makefile.
+
 ## Cel ćwiczenia
 Wykształcenie umiejętności definiowania przeciążeń operatorów arytmetycznych dwuargumentowych i jednoargumentowych dla własnych struktur danych oraz operatora porównania. Przećwiczenie podstawowych operacji na strumieniach plikowych.  Nabycie umiejętności definiowania przeciążeń operacji na strumieniach.
 

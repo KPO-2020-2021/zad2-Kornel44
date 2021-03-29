@@ -44,12 +44,12 @@ int main(int argc, char **argv)
 
  
 
-try{
-  while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe)) {
+try{                                                               
+  while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe)) {      //pobieramy kolejne pytania testu
     cout << "Podaj wynik operacji:";
     cout << WyrZ_PytanieTestowe<< endl;
-    cin >> Odp;
-    if (cin.fail()){
+    cin >> Odp;                     // wczytujemy odpowiedz
+    if (cin.fail()){                                 //jesli blad to dajemy 3 szanse na poprawe formatu 
       for(int i=0; i<3; i++){
       cerr<<"Nieprawidlowy format liczby zespolonej, sprobuj ponownie"<<endl;
       cin.clear();
@@ -59,24 +59,24 @@ try{
       break;
       }
     }
-    if (Odp==WyrZ_PytanieTestowe.Oblicz())
+    if (Odp==WyrZ_PytanieTestowe.Oblicz())            //sprawdzamy poprawnosc odpowiedzi
     {
       cout<<"Poprawna odpowiedz"<<endl;
-      Staty.dobrze++;
+      Staty.dobrze++;                     // zwiekszamy poprawne odpowiedzi
     }
       else
       {cout<<"Blenda odpowiedz"<<endl;
-      cout<<"Poprawna odpowiedz to"<<WyrZ_PytanieTestowe.Oblicz()<<endl;
+      cout<<"Poprawna odpowiedz to"<<WyrZ_PytanieTestowe.Oblicz()<<endl; // podejemy poprawna jesli byla bledna
       Staty.zle++;}
 
     }}
-  catch(runtime_error& e){
+  catch(runtime_error& e){                 // jesli gdzies wystapi blad to zwracamy go na stderr
     cerr<<"Znaleziono wyjątek"<<endl;
     cerr<<e.what();
   }
   
 
-  cout<<Staty<<endl;
+  cout<<Staty<<endl;            // wyswietlamy statystyki podejscia
   cout << endl;
   cout << " Koniec testu" << endl;
   cout << endl;
