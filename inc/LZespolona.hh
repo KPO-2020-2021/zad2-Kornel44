@@ -28,8 +28,8 @@ struct  LZespolona {
 };
 
 void CzytajZnak(std::istream & StrWej, char Znak);
-std::ostream& operator<< (std::ostream & StrWyj,const LZespolona Skl);
-std::istream& operator>> (std::istream & StrWej,const LZespolona& Skl);
+std::ostream& operator<< (std::ostream & StrWyj, LZespolona Skl);
+std::istream& operator>> (std::istream & StrWej, LZespolona& Skl);
 
 #endif
  

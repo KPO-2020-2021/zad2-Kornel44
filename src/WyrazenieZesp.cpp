@@ -33,21 +33,38 @@ LZespolona WyrazenieZesp::Oblicz ()const
     return Wynik;
 
 }
-std::ostream& operator<<(std::ostream& StrWyj, const WyrazenieZesp WyrZ)
+ostream& operator<<(ostream& StrWyj,  WyrazenieZesp WyrZ)
 {
     const char ZnakOP[]="+-*/";
     StrWyj<<WyrZ.Arg1<<ZnakOP[WyrZ.Op]<<WyrZ.Arg2;
     return StrWyj;
+
 }
 
-std::istream& operator >> (std::istream& StrWej, WyrazenieZesp& WyrZ)
+
+istream& operator >> (istream& StrWej, WyrazenieZesp& WyrZ)
 {
-    char Znak=' ';
+    char Znak;
     StrWej>>WyrZ.Arg1;
     StrWej>>Znak;
-    if (Znak!='+' && Znak!='-' && Znak!='*' && Znak!='/'){
-        StrWej.setstate(std::ios::failbit);
+    switch (Znak)
+    {
+    case '+':
+      WyrZ.Op=Op_Dodaj;
+        break;
+    case '-':
+        WyrZ.Op=Op_Odejmij;
+        break;
+    case '*':
+        WyrZ.Op=Op_Mnoz;
+        break;
+    case '/':
+        WyrZ.Op=Op_Dziel;
+        break;
+    default:
+        StrWej.setstate(ios::failbit);
         return StrWej;
+        break;
     }
     StrWej>>WyrZ.Arg2;
     return StrWej;

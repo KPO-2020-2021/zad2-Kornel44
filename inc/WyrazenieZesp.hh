@@ -30,8 +30,9 @@ struct WyrazenieZesp {
  * Funkcje ponizej nalezy zdefiniowac w module.
  *
  */
-std::ostream & operator<< (std::ostream & StrWyj, const WyrazenieZesp WyrZ);
+std::ostream & operator<< (std::ostream & StrWyj,  WyrazenieZesp WyrZ);
 std::istream & operator>> (std::istream & StrWej, WyrazenieZesp & WyrZ);
+std::istream& operator >> (std::istream& StrWej, Operator& OP);
 
 
 #endif

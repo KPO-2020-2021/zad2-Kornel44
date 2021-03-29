@@ -1,7 +1,10 @@
 #include <iostream>
 #include <cstring>
 #include <cassert>
+#include <fstream>
+#include <limits>
 #include "BazaTestu.hh"
+
 
 using namespace std;
 
@@ -9,12 +12,8 @@ using namespace std;
  * Tablica, ktora jest widoczna tylko w tym module.
  * Zawiera ona tresc latwego testu.
  */
-static WyrazenieZesp  TestLatwy[] =
-  { {{2,1}, Op_Dodaj, {1,2}},
-    {{1,0}, Op_Odejmij, {0,1}},
-    {{3,0}, Op_Mnoz, {0,3}},
-    {{4,8}, Op_Dziel, {1,0}},
-  };
+static WyrazenieZesp  TestLatwy[4];
+static WyrazenieZesp TestTrudny[6];
 
 /*
  * Analogicznie zdefiniuj test "trudne"
@@ -73,8 +72,35 @@ void UstawTest( BazaTestu *wskBazaTestu, WyrazenieZesp *wskTabTestu, unsigned in
  */
 bool InicjalizujTest( BazaTestu  *wskBazaTestu, const char *sNazwaTestu )
 {
+  ifstream Test;
+  int Pytanie=0;
+
   if (!strcmp(sNazwaTestu,"latwy")) {
+    Test.open("latwy.txt");
+    if (!Test.is_open()) return false;
+    while(Pytanie<4){
+    Test>>TestLatwy[Pytanie];
+    if(Test.fail()){
+    Test.ignore(numeric_limits<streamsize>::max(),'\n');
+    Test.clear();
+    }else{
+    Pytanie+=1;}
+    }
     UstawTest(wskBazaTestu,TestLatwy,sizeof(TestLatwy)/sizeof(WyrazenieZesp));
+    return true;
+  }
+  if (!strcmp(sNazwaTestu,"trudny")) {
+    Test.open("trudny.txt");
+    if (!Test.is_open()) return false;
+    while(Pytanie<6){
+    Test>>TestTrudny[Pytanie];
+    if(Test.fail()){
+    Test.ignore(numeric_limits<streamsize>::max(),'\n');
+    Test.clear();
+    }else{
+    Pytanie+=1;}
+    }
+    UstawTest(wskBazaTestu,TestTrudny,sizeof(TestTrudny)/sizeof(WyrazenieZesp));
     return true;
   }
   /*

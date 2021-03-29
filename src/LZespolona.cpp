@@ -73,10 +73,10 @@ LZespolona LZespolona::operator/ (double Skl2)const
   return Wynik;
 }
 
-std::ostream & operator<< (std::ostream & StrWyj, const LZespolona Skl)
+std::ostream & operator<< (std::ostream & StrWyj,  LZespolona Skl)
 {
   StrWyj<<std::fixed<<std::setprecision(2);
-  StrWyj<<"("<<Skl.re<<std::showpos<<Skl.im<<std::noshowpos<<")";
+  StrWyj<<"("<<Skl.re<<std::showpos<<Skl.im<<std::noshowpos<<"i)";
  return StrWyj;
 }
 
@@ -97,7 +97,6 @@ std::istream& operator>> (std::istream & StrWej, LZespolona & Skl)
  StrWej>>Skl.re>>Skl.im;
  CzytajZnak(StrWej,'i');
  CzytajZnak(StrWej,')');
- StrWej.ignore();
  return StrWej;
 }
 
