@@ -2,6 +2,8 @@
 
 # UWAGA: Zrealizowałem rozszerzenie dotyczące czytania wyrażeń zespolonych z pliku, w folderze głównym znajdują się dwa pliki .txt, odpowiadające zestawą łatwemu i trudnemu (Program wczytuje 4 pierwsze wyrażenia z pliku łatwy lub 6 pierwszych z pliku trudny). Aby odpalić test w wersjii  trudnej należ użyć opcji runTru w Makefile.
 
+# MODYFIKACJA: Modyfikacja wyswietlajaca argument jest testowana poprzez swoją kopie(ponieważ sama jest typu void i nie zmienia tez zadnych zmiennych wiec doctestami cieżko). Funkcja atan2 zachowuje się dość dziwnie gdy dostanie ujemną wartość i z jakiegos powodu poprawny wynik argumentu lzesp otrzymuje bez dodania pi. Ciężko jest to wytłumaczyć (atan2 samo dodaje pi do wyniku?????)
+
 ## Cel ćwiczenia
 Wykształcenie umiejętności definiowania przeciążeń operatorów arytmetycznych dwuargumentowych i jednoargumentowych dla własnych struktur danych oraz operatora porównania. Przećwiczenie podstawowych operacji na strumieniach plikowych.  Nabycie umiejętności definiowania przeciążeń operacji na strumieniach.
 

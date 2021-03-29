@@ -262,3 +262,123 @@ TEST_CASE("LZespolona - wczytywanie standard") {
     CHECK( "(10.00+10.10i)" == out.str() );
 }
 
+TEST_CASE("Operator +="){
+    LZespolona x, y, z, a, b, c, d, g, h;
+    
+    a.re=0;
+    a.im=0;
+
+    b.re=0.0;
+    b.im=0.0;
+
+    c.re=0.001;
+    c.im=0.001;
+
+    d.re=0.009;
+    d.im=0.009;
+
+    x.re = 1;
+    x.im = 1;
+
+    y.re = 1;
+    y.im = -3;
+
+    z.re = 2;
+    z.im = -2;
+
+    g.re = 1;
+    g.im = 1;
+
+    h.re = 1;
+    h.im = -3;
+
+    x+=a;
+    CHECK(x==g);
+    x+=c;
+    CHECK(x==g);
+    x+=y;
+    CHECK(x== z);
+    CHECK_FALSE(x ==g);
+    y+=c;
+    CHECK(y==h);
+    a+=d;
+    CHECK(a==b);
+}
+
+TEST_CASE("OPERATOR /="){
+    LZespolona x, y, z, a, b, c, d, g, h;
+
+    a.re=0;
+    a.im=0;
+
+    b.re=1;
+    b.im=0;
+
+    c.re=2;
+    c.im=3;
+
+    d.re=2;
+    d.im=4;
+
+    x.re = 1;
+    x.im = 1;
+
+    y.re = 2;
+    y.im = -3;
+
+    z.re = -0.38;
+    z.im = 0.92;
+
+    g.re = 2;
+    g.im = 3;
+
+    h.re = -0.38;
+    h.im = 0.92;
+
+    z/=b;
+    CHECK(z==h);
+    WARN_THROWS(c/=a);
+    c/=d;
+    CHECK_FALSE(c==g);
+    g/=x;
+    CHECK(g==d);
+    y/=y;
+    CHECK(y==b);
+   
+}
+TEST_CASE("Argument liczby zespolonej"){
+    LZespolona x, y, z, a, b, c;
+   
+   
+    x.re = 2;
+    x.im = 2;
+
+    y.re = 0;
+    y.im = 0;
+
+    z.re = 0;
+    z.im = -3;
+
+    a.re= 0;
+    a.im = 4.03;
+
+    b.re=-4;
+    b.im=2;
+
+    c.re= -3;
+    c.im= -1;
+
+    std::ostringstream outx, outc,outz,outa, outb;
+    Testarg(outx, x);
+    Testarg(outc, c);
+    Testarg(outz, z);
+    Testarg(outa, a);
+    Testarg(outb, b);
+
+    CHECK(outx.str()=="0.79");
+    CHECK(outz.str()=="-1.57");
+    CHECK(outa.str()=="1.57");
+    CHECK(outb.str()=="2.68");
+    CHECK(outc.str()=="-2.82");
+    WARN_THROWS(arg(y));
+}

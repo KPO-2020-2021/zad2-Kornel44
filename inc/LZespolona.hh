@@ -30,6 +30,11 @@ struct  LZespolona {
 void CzytajZnak(std::istream & StrWej, char Znak);
 std::ostream& operator<< (std::ostream & StrWyj, LZespolona Skl);
 std::istream& operator>> (std::istream & StrWej, LZespolona& Skl);
+void arg(LZespolona z); // wyswietlanie argumentu liczby zespolonej + testy; konieczny atan2 z <cmath>
+LZespolona operator += (LZespolona &Arg1, LZespolona const &Arg2); // + testy (takie same, jak dla +)
+LZespolona operator /= (LZespolona &Arg1, LZespolona const &Arg2); // + testy (takie same, jak dla /) 
+
+std::ostream& Testarg(std::ostream& StrWyj, LZespolona z); //Funkcja potrzebna do przetestowania funkcji void za pomocą doctest wypisującej argumenty LZesp
 
 #endif
  

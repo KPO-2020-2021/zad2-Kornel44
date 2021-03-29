@@ -4,13 +4,15 @@
 #include <fstream>
 #include <limits>
 #include "BazaTestu.hh"
+#define ROZMIARLATWY 4
+#define ROZMIARTRUDNY 6
 
 
 using namespace std;
 
 //Tablice o zadanej wielkosci przygotowane do wczytania testu
-static WyrazenieZesp  TestLatwy[4];
-static WyrazenieZesp TestTrudny[6];
+static WyrazenieZesp  TestLatwy[ROZMIARLATWY];
+static WyrazenieZesp TestTrudny[ROZMIARTRUDNY];
 
 /*
  * Analogicznie zdefiniuj test "trudne"
@@ -75,7 +77,7 @@ bool InicjalizujTest( BazaTestu  *wskBazaTestu, const char *sNazwaTestu )
   if (!strcmp(sNazwaTestu,"latwy")) {
     Test.open("latwy.txt");              //otwieramy plik w trybie do odczytu
     if (!Test.is_open()) return false; // jesli blad otwarcia pliku zwracamy false
-    while(Pytanie<4){                  //wczytujemy pierwsze 4 poprawne wyrazenia z pliku do tablicy 
+    while(Pytanie<ROZMIARLATWY){                  //wczytujemy pierwsze 4 poprawne wyrazenia z pliku do tablicy 
     Test>>TestLatwy[Pytanie];
     if(Test.fail()){
     Test.ignore(numeric_limits<streamsize>::max(),'\n'); //po bledzie wczytania ignorujemy cala linie
@@ -89,7 +91,7 @@ bool InicjalizujTest( BazaTestu  *wskBazaTestu, const char *sNazwaTestu )
   if (!strcmp(sNazwaTestu,"trudny")) {                  //to samo jak wyzej dla testu trudnego
     Test.open("trudny.txt");
     if (!Test.is_open()) return false;
-    while(Pytanie<6){
+    while(Pytanie<ROZMIARTRUDNY){
     Test>>TestTrudny[Pytanie];
     if(Test.fail()){
     Test.ignore(numeric_limits<streamsize>::max(),'\n');

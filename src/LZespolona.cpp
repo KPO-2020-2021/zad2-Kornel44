@@ -183,3 +183,85 @@ bool LZespolona::operator == ( LZespolona Skl2)const
   else
   return false;
 }
+/*!
+ * Realizuje wyświetlanie argumentu liczby zespolonej na standardowe wyjsicie
+ * Argumenty:
+ *    z - liczba ktorej argument ma byc wyswietlony
+ * Zwraca:
+ *    argument liczby zespolonej z dokladnoscia do 2 miejsc po przecinku na standardowe wejscie lu
+ * blad jesli liczba zespolona rowna zero
+ */
+void arg(LZespolona  z){
+  double arg;
+
+  if(z.re==0){
+    if(z.im>0){
+     arg=(M_PI/2);
+    }
+    else if(z.im<0){
+      arg=(-M_PI/2);
+    }
+    else{
+      throw std::runtime_error("Brak agumentu dla LZespolona=0");
+    }}
+  else{
+    if(z.re>0){
+    arg=(atan2(z.im, z.re));
+  }else{
+    arg=atan2(z.im, z.re)/*+M_PI)*/;//dziwna sprawa bo chyba sam atan2 cos robi z ujemnymi liczbami 
+  }
+
+  }
+std::cout<<std::fixed<<std::setprecision(2)<<arg;
+}
+/*!
+ * Realizuje podstawienie sumy dwuch liczb zespolonych pod wartosc pierwszej
+ * Argumenty:
+ *    Arg1 -  skladnik modyfikowany
+ *    Arg2 - skladnik nie modyfikowany
+ * Zwraca:
+ *    zmododyfikowany skladnik pierwszy
+ */
+LZespolona operator += (LZespolona &Arg1, LZespolona const &Arg2){
+  Arg1=Arg1+Arg2;
+  return Arg1;
+}
+/*!
+ * Realizuje podstawienie ilorazu dwuch liczb zespolonych pod wartosc pierwszej
+ * Argumenty:
+ *    Arg1 -  skladnik modyfikowany
+ *    Arg2 - skladnik nie modyfikowany
+ * Zwraca:
+ *    zmododyfikowany skladnik pierwszy 
+ */
+LZespolona operator /= (LZespolona &Arg1, LZespolona const &Arg2){
+  Arg1=Arg1/Arg2;
+  return Arg1;
+}
+
+
+
+
+
+//                  DO TESTOW BO VOID NIC NIE ZWRACA
+std::ostream& Testarg(std::ostream& StrWyj,LZespolona z){
+  double arg;
+
+  if(z.re==0){
+    if(z.im>0){
+     arg=(M_PI_2);
+    }
+    else if(z.im<0){
+      arg=(-M_PI_2);
+    }
+    else{
+      throw std::runtime_error("Brak agumentu dla LZespolona=0");
+    }}
+  else{
+    if(z.re>0){
+    arg=(atan2(z.im, z.re));
+  }else{
+    arg=atan2(z.im, z.re)/*+M_PI*/; //dziwna sprawa bo chyba sam atan2 cos robi 
+  }}
+ return StrWyj<<std::fixed<<std::setprecision(2)<<arg;
+}
